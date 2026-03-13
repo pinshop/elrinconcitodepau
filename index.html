@@ -149,6 +149,39 @@
             transition: transform 0.3s ease;
         }
 
+        .product-image-slider {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .product-image-slider img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .product-image-slider img.active {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        .product-image-slider img.prev {
+            opacity: 0.8;
+            transform: translateX(-100%) scale(0.95);
+        }
+
+        .product-image-slider img.next {
+            opacity: 0.8;
+            transform: translateX(100%) scale(0.95);
+        }
+
         .product-image:hover {
             transform: scale(1.05);
         }
@@ -1320,9 +1353,13 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1700">
                     <div class="product-card">
                         <span class="badge-new">Popular</span>
-                        <img src="images/pro17.jpeg" alt="Suero Facial Autobronceador" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider17">
+                            <img src="images/pro17.jpeg" alt="Suero Facial Autobronceador" class="active" onclick="changeSlide(17, 1)">
+                            <img src="images/pro17foto2.jpeg" alt="Suero Facial Autobronceador" onclick="changeSlide(17, 1)">
+                            <img src="images/pro17foto3.jpeg" alt="Suero Facial Autobronceador" onclick="changeSlide(17, 1)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Cocora Self Tan Face Serum - Suero Facial Autobronceador</h3>
+                            <h3 class="product-title">☀️ Cocora Self Tan Serum - Suero Facial Autobronceador</h3>
                             <p class="product-description">Logra un glow continuo y un dorado perfecto sin necesidad de sol. Este sérum ligero se integra a tu rutina facial para construir un bronceado uniforme, dejando tu piel luminosa e hidratada.</p>
                             <div class="product-price">$80.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1336,9 +1373,13 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1800">
                     <div class="product-card">
                         <span class="badge-new">Nuevo</span>
-                        <img src="images/pro18.jpeg" alt="Suero Hidratante Antiedad" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider18">
+                            <img src="images/pro18.jpeg" alt="Suero Hidratante Antiedad" class="active" onclick="changeSlide(18, 1)">
+                            <img src="images/pro18foto2.jpeg" alt="Suero Hidratante Antiedad" onclick="changeSlide(18, 1)">
+                            <img src="images/pro18foto3.jpeg" alt="Suero Hidratante Antiedad" onclick="changeSlide(18, 1)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Ties Antiedad Serum - Suero Hidratante Antiedad</h3>
+                            <h3 class="product-title">✨ Ties Antiedad Serum - Suero Hidratante Antiedad</h3>
                             <p class="product-description">Rejuvenece tu piel con esta avanzada mezcla de ácido hialurónico, glicólico y niacinamida. Su fórmula enriquecida con extractos naturales disminuye los signos del envejecimiento, previene manchas y devuelve la luminosidad para un tono más uniforme y saludable.</p>
                             <div class="product-price">$90.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1351,9 +1392,13 @@
                 <!-- Product 19 -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1900">
                     <div class="product-card">
-                        <img src="images/pro19.jpeg" alt="Exfoliante de Labios" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider19">
+                            <img src="images/pro19.jpeg" alt="Exfoliante de Labios" class="active" onclick="changeSlide(19, 1)">
+                            <img src="images/pro19foto2.jpeg" alt="Exfoliante de Labios" onclick="changeSlide(19, 1)">
+                            <img src="images/pro19foto3.jpeg" alt="Exfoliante de Labios" onclick="changeSlide(19, 1)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Cocora Slow & Day Lip Scrub - Exfoliante de Labios</h3>
+                            <h3 class="product-title">💋 Cocora Lip Scrub - Exfoliante de Labios</h3>
                             <p class="product-description">Luce unos labios increíblemente suaves y renovados con nuestro exfoliante enriquecido con Vitamina E. Elimina delicadamente las células muertas mientras aporta una hidratación profunda, dejando tus labios listos para lucir cualquier color con un acabado perfecto.</p>
                             <div class="product-price">$15.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1367,9 +1412,13 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2000">
                     <div class="product-card">
                         <span class="badge-new">Exclusivo</span>
-                        <img src="images/pro20.jpeg" alt="Labial en Barra" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider20">
+                            <img src="images/pro20.jpeg" alt="Labial en Barra" class="active" onclick="changeSlide(20, 1)">
+                            <img src="images/pro20foto2.jpeg" alt="Labial en Barra" onclick="changeSlide(20, 1)">
+                            <img src="images/pro20foto3.jpeg" alt="Labial en Barra" onclick="changeSlide(20, 1)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Ésika Colorfix Barra - Labial de Larga Duración</h3>
+                            <h3 class="product-title">🎨 Ésika Colorfix Barra - Labial de Larga Duración</h3>
                             <p class="product-description">Disfruta de un color intenso y sofisticado durante todo el día con nuestra fórmula renovada 100% no transfer. Este labial en barra se desliza suavemente para ofrecerte un acabado impecable que resiste tu ritmo sin necesidad de retoques.</p>
                             <div class="product-price">$30.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1383,9 +1432,13 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2100">
                     <div class="product-card">
                         <span class="badge-new">Popular</span>
-                        <img src="images/pro21.jpeg" alt="Loción Perfumada" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider21">
+                            <img src="images/pro21.jpeg" alt="Loción Perfumada" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro21foto2.jpeg" alt="Loción Perfumada" onclick="openImageModal(this.src)">
+                            <img src="images/pro21foto3.jpeg" alt="Loción Perfumada" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">L'BEL Satin Rouge - Loción Perfumada Corporal</h3>
+                            <h3 class="product-title">🌹 L'BEL Satin Rouge - Loción Perfumada Corporal</h3>
                             <p class="product-description">Envuelve tu piel en una experiencia de suavidad y sofisticación. Esta loción perfumada no solo humecta profundamente, sino que intensifica y prolonga el aroma de tu fragancia favorita, dejando un acabado satinado y delicado durante todo el día.</p>
                             <div class="product-price">$50.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1398,9 +1451,13 @@
                 <!-- Product 22 -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2200">
                     <div class="product-card">
-                        <img src="images/pro22.jpeg" alt="Toallas Desechables" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider22">
+                            <img src="images/pro22.jpeg" alt="Toallas Desechables" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro22foto2.jpeg" alt="Toallas Desechables" onclick="openImageModal(this.src)">
+                            <img src="images/pro22foto3.jpeg" alt="Toallas Desechables" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Biury Clean Dermotoallas - Toallas Desechables Faciales</h3>
+                            <h3 class="product-title">🧻 Biury Clean Dermotoallas - Toallas Desechables Faciales</h3>
                             <p class="product-description">Transforma tu rutina de limpieza con estas dermotoallas diseñadas para fortalecer la barrera cutánea. Libres de bacterias y aptas para piel sensible, son el aliado perfecto para una piel con menos imperfecciones y un rostro siempre fresco y saludable.</p>
                             <div class="product-price">$10.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1413,10 +1470,13 @@
                 <!-- Product 23 -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2300">
                     <div class="product-card">
-                        <span class="badge-new">Nuevo</span>
-                        <img src="images/pro23.jpeg" alt="Bálsamo Labial" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider23">
+                            <img src="images/pro23.jpeg" alt="Bálsamo Labial" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro23foto2.jpeg" alt="Bálsamo Labial" onclick="openImageModal(this.src)">
+                            <img src="images/pro23foto3.jpeg" alt="Bálsamo Labial" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Hello Sunday The One For Your Lips - Bálsamo Labial con SPF 50</h3>
+                            <h3 class="product-title">💋 Hello Sunday Bálsamo - Bálsamo Labial con SPF 50</h3>
                             <p class="product-description">Protege y nutre tu sonrisa con este bálsamo transparente de alta protección SPF 50. Enriquecido con manteca de karité y escualeno, mantiene tus labios profundamente hidratados y con un acabado brillante natural, ya sea solo o sobre tu labial favorito.</p>
                             <div class="product-price">$12.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1431,7 +1491,7 @@
                     <div class="product-card">
                         <img src="images/pro24.jpeg" alt="Mascarilla Facial" class="product-image" onclick="openImageModal(this.src)">
                         <div class="product-body">
-                            <h3 class="product-title">Dermohelp Mineral Mask - Mascarilla Facial de Arcilla Mineral</h3>
+                            <h3 class="product-title">🧱 Dermohelp Mineral Mask - Mascarilla Facial de Arcilla Mineral</h3>
                             <p class="product-description">Purifica y renueva tu rostro con el poder de los minerales. Esta mascarilla de arcilla está formulada para limpiar profundamente los poros, absorber el exceso de grasa y suavizar la textura de la piel, dejándola fresca, equilibrada y con una apariencia saludable.</p>
                             <div class="product-price">$80.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1444,11 +1504,14 @@
                 <!-- Product 25 -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2500">
                     <div class="product-card">
-                        <span class="badge-new">Exclusivo</span>
-                        <img src="images/pro25.jpeg" alt="Protector Solar" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider25">
+                            <img src="images/pro25.jpeg" alt="Protector Solar" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro25foto2.jpeg" alt="Protector Solar" onclick="openImageModal(this.src)">
+                            <img src="images/pro25foto3.jpeg" alt="Protector Solar" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Dhems Solar Antiedad - Protector Solar SPF 50+ sin Color</h3>
-                            <p class="product-description">Protege tu piel con una defensa avanzada contra los rayos UVA/UVB mientras combate los signos del envejecimiento. Su fórmula de alto espectro tiene acción antioxidante e hidratante que estimula la síntesis de colágeno, dejando un acabado invisible ideal para todo tipo de piel.</p>
+                            <h3 class="product-title">🏖️ Dhems Solar Antiedad - Protector Solar SPF 50+ sin Color</h3>
+                            <p class="product-description">Protege tu piel con una defensa avanzada contra los rayos UVA/UVB mientras combates los signos del envejecimiento. Su fórmula de alto espectro tiene acción antioxidante e hidratante que estimula la síntesis de colágeno, dejando un acabado invisible ideal para todo tipo de piel.</p>
                             <div class="product-price">$80.000</div>
                             <button class="btn btn-primary-custom w-100">
                                 <i class="bi bi-cart-plus"></i> Agregar al Carrito
@@ -1461,9 +1524,13 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2600">
                     <div class="product-card">
                         <span class="badge-new">Popular</span>
-                        <img src="images/pro26.jpeg" alt="Mantequilla Corporal" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider26">
+                            <img src="images/pro26.jpeg" alt="Mantequilla Corporal" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro26foto2.jpeg" alt="Mantequilla Corporal" onclick="openImageModal(this.src)">
+                            <img src="images/pro26foto3.jpeg" alt="Mantequilla Corporal" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Cocora Shimmer Glow - Mantequilla Corporal</h3>
+                            <h3 class="product-title">🌺 Cocora Shimmer Glow - Mantequilla Corporal</h3>
                             <p class="product-description">Dale a tu cuerpo una hidratación profunda con un acabado radiante. Nuestra mantequilla corporal Shimmer Glow deja tu piel suave, sedosa y con destellos sutiles que resaltan tu belleza natural, mientras disfrutas de sus deliciosos aromas tropicales.</p>
                             <div class="product-price">$60.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1478,7 +1545,7 @@
                     <div class="product-card">
                         <img src="images/pro27.jpeg" alt="Lápiz Delineador" class="product-image" onclick="openImageModal(this.src)">
                         <div class="product-body">
-                            <h3 class="product-title">SAMY Smooth Pencil Liner - Lápiz Delineador con Sacapuntas</h3>
+                            <h3 class="product-title">🖊 SAMY Smooth Pencil Liner - Lápiz Delineador con Sacapuntas</h3>
                             <p class="product-description">Define tu mirada o tus labios con precisión y suavidad. Este delineador de textura cremosa se desliza sin esfuerzo, brindando un color intenso y duradero. Además, incluye su propio sacapuntas en la tapa para que siempre estés lista para un trazo perfecto.</p>
                             <div class="product-price">$4.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1492,9 +1559,13 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2800">
                     <div class="product-card">
                         <span class="badge-new">Nuevo</span>
-                        <img src="images/pro28.jpeg" alt="Rubor Líquido" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider28">
+                            <img src="images/pro28.jpeg" alt="Máscara de Pestañas" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro28foto2.jpeg" alt="Máscara de Pestañas" onclick="openImageModal(this.src)">
+                            <img src="images/pro28foto3.jpeg" alt="Máscara de Pestañas" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Samy Xtravagant Length - Mascara de Pestañas</h3>
+                            <h3 class="product-title">🦰 Samy Xtravagant Length - Mascara de Pestañas</h3>
                             <p class="product-description">Lleva tus pestañas a otro nivel con un alargamiento extremo y una definición impecable. Su cepillo especializado permite separar cada pestaña desde la raíz, brindando un efecto de longitud infinita y una mirada impactante sin dejar grumos.</p>
                             <div class="product-price">$30.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1508,9 +1579,13 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2900">
                     <div class="product-card">
                         <span class="badge-new">Exclusivo</span>
-                        <img src="images/pro29.jpeg" alt="Sérum Facial" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider29">
+                            <img src="images/pro29.jpeg" alt="Sérum Facial" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro29foto2.jpeg" alt="Sérum Facial" onclick="openImageModal(this.src)">
+                            <img src="images/pro29foto3.jpeg" alt="Sérum Facial" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Sérum Facial Niacinamida 10% + Zinc 1% - Botanikalia (30ml)</h3>
+                            <h3 class="product-title">🧪 Botanikalia Niacinamida - Sérum Facial</h3>
                             <p class="product-description">Transforma la textura de tu piel con el Sérum de Niacinamida de Botanikalia. Esta potente fórmula combina un 10% de Niacinamida (Vitamina B3) con un 1% de Zinc PCA, creando el aliado perfecto para combatir las imperfecciones, regular el exceso de grasa y unificar el tono del rostro.</p>
                             <div class="product-price">$50.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1524,9 +1599,13 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3000">
                     <div class="product-card">
                         <span class="badge-new">Popular</span>
-                        <img src="images/pro30.jpeg" alt="Exfoliante Corporal" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider30">
+                            <img src="images/pro30.jpeg" alt="Exfoliante Corporal" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro30foto2.jpeg" alt="Exfoliante Corporal" onclick="openImageModal(this.src)">
+                            <img src="images/pro30foto3.jpeg" alt="Exfoliante Corporal" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Aurora Butt & Boobs Polish - Exfoliante Antiacné Rainbow (300ml)</h3>
+                            <h3 class="product-title">🌈 Aurora Rainbow Polish - Exfoliante Corporal</h3>
                             <p class="product-description">Dale a tu piel un cuidado de ensueño con el Exfoliante Corporal Aurora. Este pulidor de textura batida y colores arcoíris no solo es visualmente increíble, sino que está específicamente formulado para tratar zonas delicadas como los glúteos y el busto.</p>
                             <div class="product-price">$90.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1539,9 +1618,13 @@
                 <!-- Product 31 -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3100">
                     <div class="product-card">
-                        <img src="images/pro31.jpeg" alt="Mascarilla Capilar" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider31">
+                            <img src="images/pro31.jpeg" alt="Mascarilla Capilar" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro31foto2.jpeg" alt="Mascarilla Capilar" onclick="openImageModal(this.src)">
+                            <img src="images/pro31foto3.jpeg" alt="Mascarilla Capilar" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Mascarilla Intensiva Babaria Color Capture - Tsubaki y Fruta de la Pasión</h3>
+                            <h3 class="product-title">🌸 Babaria Color Capture - Mascarilla Capilar</h3>
                             <p class="product-description">Mantén la intensidad de tu color por mucho más tiempo con la Mascarilla Intensiva Color Capture de Babaria. Formulada específicamente para cabellos teñidos o con mechas, esta mascarilla actúa profundamente para sellar la fibra capilar, prolongando la vida del tinte y revitalizando el brillo perdido tras los procesos químicos.</p>
                             <div class="product-price">$25.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1555,9 +1638,13 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3200">
                     <div class="product-card">
                         <span class="badge-new">Popular</span>
-                        <img src="images/pro32.jpeg" alt="Sérum Capilar" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider32">
+                            <img src="images/pro32.jpeg" alt="Sérum Capilar" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro32foto2.jpeg" alt="Sérum Capilar" onclick="openImageModal(this.src)">
+                            <img src="images/pro32foto3.jpeg" alt="Sérum Capilar" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Sérum Finalizador Capilar HAIR2YOU - Fórmula Avanzada 5-en-1 (60ml)</h3>
+                            <h3 class="product-title">💇‍♀️ HAIR2YOU Sérum 5-en-1 - Sérum Capilar</h3>
                             <p class="product-description">Dale el toque final perfecto a tu peinado con el Sérum Finalizador de HAIR2YOU. Este producto de alta gama ha sido diseñado con una innovadora fórmula 5-en-1 que actúa instantáneamente para transformar la apariencia de tu cabello, dejándolo con un acabado de salón, sedoso y profundamente brillante.</p>
                             <div class="product-price">$35.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1570,9 +1657,13 @@
                 <!-- Product 33 -->
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3300">
                     <div class="product-card">
-                        <img src="images/pro33.jpeg" alt="Máscara de Pestañas" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider33">
+                            <img src="images/pro33.jpeg" alt="Máscara de Pestañas" class="active" onclick="openImageModal(this.src)">
+                            <img src="images/pro33foto2.jpeg" alt="Máscara de Pestañas" onclick="openImageModal(this.src)">
+                            <img src="images/pro33foto3.jpeg" alt="Máscara de Pestañas" onclick="openImageModal(this.src)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Mascara SheDoes Maxi-Volume Length - Efecto Extensión de Pestañas (13g)</h3>
+                            <h3 class="product-title">🦰 SheDoes Maxi-Volume - Máscara de Pestañas</h3>
                             <p class="product-description">Lleva tus pestañas al siguiente nivel con la Mascara Maxi-Volume Length de SheDoes. Esta pestañina ha sido diseñada para quienes buscan un efecto de "pestañas postizas" sin complicaciones. Su fórmula avanzada contiene fibras de extensión que se adhieren a tus pestañas naturales, logrando un alargamiento extremo y un grosor máximo desde la raíz hasta las puntas.</p>
                             <div class="product-price">$15.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1586,9 +1677,13 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3400">
                     <div class="product-card">
                         <span class="badge-new">Exclusivo</span>
-                        <img src="images/pro34.jpeg" alt="Vitamina C Tópica" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-image-slider" id="slider34">
+                            <img src="images/pro34.jpeg" alt="Vitamina C Tópica" class="active" onclick="changeSlide(34, 1)">
+                            <img src="images/pro34foto2.jpeg" alt="Vitamina C Tópica" onclick="changeSlide(34, 1)">
+                            <img src="images/pro34foto3.jpeg" alt="Vitamina C Tópica" onclick="changeSlide(34, 1)">
+                        </div>
                         <div class="product-body">
-                            <h3 class="product-title">Cetopic 22% Serum - Vitamina C Tópica Liposomal (30g)</h3>
+                            <h3 class="product-title">🍊 Cetopic 22% Vitamina C - Suero Premium</h3>
                             <p class="product-description">Rejuvenece y protege tu rostro con el poder del Cetopic 22% Serum de Medihealth. Este tratamiento de grado dermatológico ofrece una de las concentraciones más altas de Vitamina C en el mercado, diseñada para combatir el envejecimiento prematuro y devolver la luminosidad perdida a la piel.</p>
                             <div class="product-price">$200.000</div>
                             <button class="btn btn-primary-custom w-100">
@@ -1597,6 +1692,47 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Product 35 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3500">
+                    <div class="product-card">
+                        <span class="badge-new">Nuevo</span>
+                        <div class="product-image-slider" id="slider35">
+                            <img src="images/pro35.jpeg" alt="Jelly Tint Stick" class="active" onclick="changeSlide(35, 1)">
+                            <img src="images/pro35foto2.jpeg" alt="Jelly Tint Stick" onclick="changeSlide(35, 1)">
+                            <img src="images/pro35foto3.jpeg" alt="Jelly Tint Stick" onclick="changeSlide(35, 1)">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">🍯 Jelly Tint Stick 3-en-1 - Barra Multifuncional</h3>
+                            <p class="product-description">Descubre la magia del color con nuestro Jelly Tint Stick, la barra multifuncional con textura de gelatina que está revolucionando las rutinas de belleza. Este producto innovador está diseñado para dar un toque de color natural y fresco a tus labios, mejillas y ojos con un solo producto.</p>
+                            <div class="product-price">$12.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 36 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3600">
+                    <div class="product-card">
+                        <span class="badge-new">Popular</span>
+                        <div class="product-image-slider" id="slider36">
+                            <img src="images/pro36.jpeg" alt="Rubor Líquido" class="active" onclick="changeSlide(36, 1)">
+                            <img src="images/pro36foto2.jpeg" alt="Rubor Líquido" onclick="changeSlide(36, 1)">
+                            <img src="images/pro36foto3.jpeg" alt="Rubor Líquido" onclick="changeSlide(36, 1)">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">💖 Sweet Heart Liquid Blusher - Rubor Líquido de Larga Duración</h3>
+                            <p class="product-description">Logra un "sonrojo de amor" natural y duradero con el Sweet Heart Liquid Blusher. Este rubor líquido es el secreto para un rostro fresco y radiante en segundos. Su fórmula innovadora combina la ligereza del agua con la pigmentación intensa de un tinte, permitiéndote construir la intensidad del color según tu gusto: desde un toque sutil hasta un acabado más dramático.</p>
+                            <div class="product-price">$15.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1654,6 +1790,95 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
+        // Image slider functionality
+        const sliderStates = {};
+        
+        function initImageSliders() {
+            const sliders = document.querySelectorAll('.product-image-slider');
+            
+            sliders.forEach(slider => {
+                const sliderId = slider.id;
+                const images = slider.querySelectorAll('img');
+                
+                // Initialize slider state
+                sliderStates[sliderId] = {
+                    currentIndex: 0,
+                    images: images,
+                    interval: null,
+                    isManualChange: false
+                };
+                
+                // Start automatic rotation
+                startAutoRotation(sliderId);
+            });
+        }
+        
+        function startAutoRotation(sliderId) {
+            const state = sliderStates[sliderId];
+            if (state.interval) clearInterval(state.interval);
+            
+            state.interval = setInterval(() => {
+                if (!state.isManualChange) {
+                    changeSlide(sliderId, 1);
+                }
+            }, 3000);
+        }
+        
+        function changeSlide(sliderId, direction) {
+            const state = sliderStates[sliderId];
+            const images = state.images;
+            const currentIndex = state.currentIndex;
+            
+            // Remove all classes
+            images.forEach(img => {
+                img.classList.remove('active', 'prev', 'next');
+            });
+            
+            // Determine next index
+            let nextIndex;
+            if (direction === 1) {
+                nextIndex = (currentIndex + 1) % images.length;
+            } else {
+                nextIndex = (currentIndex - 1 + images.length) % images.length;
+            }
+            
+            // Set classes for carousel effect
+            images[currentIndex].classList.add('prev');
+            images[nextIndex].classList.add('active');
+            
+            // Show next image preview
+            const nextNextIndex = (nextIndex + 1) % images.length;
+            images[nextNextIndex].classList.add('next');
+            
+            // Update state
+            state.currentIndex = nextIndex;
+            
+            // Reset manual change flag after a delay
+            state.isManualChange = true;
+            setTimeout(() => {
+                state.isManualChange = false;
+            }, 3000);
+        }
+        
+        function showControls(sliderId) {
+            const controls = document.querySelector(`#${sliderId} .slider-controls`);
+            if (controls) {
+                controls.classList.add('visible');
+            }
+        }
+        
+        function hideControls(sliderId) {
+            const controls = document.querySelector(`#${sliderId} .slider-controls`);
+            if (controls) {
+                controls.classList.remove('visible');
+            }
+        }
+
+        // Initialize sliders when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initImageSliders();
+        });
+
         // Initialize AOS
         AOS.init({
             duration: 1000,
