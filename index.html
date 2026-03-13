@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>El Rinconcito de Pau</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #FFB6C1;
+            --color-secondary: #FFA07A;
+            --color-light: #FFF0F5;
+            --color-dark: #FF69B4;
+            --color-accent: #DDA0DD;
+            --color-text: #8B4513;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--color-light) 0%, #fff 100%);
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            box-shadow: 0 2px 15px rgba(255, 182, 193, 0.3);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-section {
+            background: none;
+            padding: 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            height: 60vh;
+            min-height: 400px;
+        }
+
+        .hero-section .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            padding-bottom: 40px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-title img {
+            max-width: 100%;
+            height: auto;
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 30px;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 1px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(255, 182, 193, 0.2);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 182, 193, 0.4);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+        }
+
+        .product-image {
+            height: 250px;
+            object-fit: cover;
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            max-height: 80%;
+            object-fit: contain;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--color-primary);
+            background: rgba(255, 182, 193, 0.2);
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .product-body {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--color-dark);
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 2;
+            position: relative;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary-custom:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 182, 193, 0.4);
+            background: linear-gradient(90deg, var(--color-dark), var(--color-primary));
+        }
+
+        .footer {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--color-dark);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+        }
+
+        .badge-new {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--color-accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .promo-bar {
+            background: black;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: bold;
+            overflow: hidden;
+            position: relative;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .promo-text {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            animation: slidePromo 15s infinite;
+        }
+
+        .promo-text:nth-child(1) { animation-delay: 0s; }
+        .promo-text:nth-child(2) { animation-delay: 5s; }
+        .promo-text:nth-child(3) { animation-delay: 10s; }
+
+        @keyframes slidePromo {
+            0%, 5% { 
+                opacity: 0; 
+                transform: translateX(100%);
+            }
+            10%, 30% { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+            35%, 100% { 
+                opacity: 0; 
+                transform: translateX(-100%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .cart-modal {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        /* Loader Styles */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loader-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .loader-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .loader-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .loader-dot {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .loader-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loader-dot:nth-child(2) { animation-delay: -0.16s; }
+        .loader-dot:nth-child(3) { animation-delay: 0; }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 15px rgba(0,0,0,0.1);
+            z-index: 10001;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-modal.open {
+            right: 0;
+        }
+
+        .cart-header {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s ease;
+        }
+
+        .cart-item:hover {
+            background: #f8f9fa;
+        }
+
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border: 1px solid var(--color-primary);
+            background: white;
+            color: var(--color-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .cart-checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-checkout-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.4);
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 10000;
+            display: none;
+        }
+
+        .cart-overlay.show {
+            display: block;
+        }
+
+        .cart-icon-container {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--color-dark);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* Floating Cart Icon */
+        .floating-cart-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .floating-cart-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255, 182, 193, 0.6);
+        }
+
+        .floating-cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--color-dark);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        .floating-cart-badge.hidden {
+            display: none;
+        }
+
+        /* WhatsApp Floating Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .floating-whatsapp {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                bottom: 15px;
+                left: 15px;
+            }
+        }
+
+        /* Search and Filter Styles */
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            border: 2px solid var(--color-primary);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .search-input:focus {
+            border-color: var(--color-dark);
+            box-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-primary);
+            font-size: 20px;
+        }
+
+        .search-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            margin-top: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .search-dropdown.show {
+            display: block;
+        }
+
+        .search-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .search-item:hover {
+            background: var(--color-light);
+        }
+
+        .search-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-item-title {
+            font-weight: bold;
+            color: var(--color-dark);
+            margin-bottom: 3px;
+        }
+
+        .search-item-price {
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        .search-item-category {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 3px;
+        }
+
+        .filters-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(255, 182, 193, 0.1);
+        }
+
+        .filter-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--color-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .clear-filters {
+            font-size: 0.9rem;
+            color: var(--color-primary);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .clear-filters:hover {
+            color: var(--color-dark);
+            text-decoration: underline;
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-group-title {
+            font-weight: bold;
+            color: var(--color-text);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .category-chip {
+            padding: 8px 16px;
+            border: 2px solid var(--color-primary);
+            border-radius: 20px;
+            background: white;
+            color: var(--color-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .category-chip:hover {
+            background: var(--color-light);
+        }
+
+        .category-chip.active {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .price-range-container {
+            margin-top: 15px;
+        }
+
+        .price-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e0e0e0;
+            outline: none;
+            -webkit-appearance: none;
+            margin: 15px 0;
+        }
+
+        .price-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(255, 182, 193, 0.3);
+        }
+
+        .price-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 10px rgba(255, 182, 193, 0.3);
+        }
+
+        .price-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .price-input {
+            width: 80px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .additional-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .filter-checkbox input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--color-primary);
+        }
+
+        .products-results {
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--color-text);
+            font-size: 1.1rem;
+        }
+
+        .products-count {
+            font-weight: bold;
+            color: var(--color-primary);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            color: var(--color-light);
+            margin-bottom: 20px;
+        }
+
+        .no-results h3 {
+            color: var(--color-text);
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .filters-section {
+                padding: 20px;
+            }
+
+            .filter-title {
+                font-size: 1.1rem;
+            }
+
+            .category-filters {
+                gap: 8px;
+            }
+
+            .category-chip {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+
+            .price-input {
+                width: 70px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Mobile Filters Toggle */
+        .mobile-filters-toggle {
+            display: none;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-filters-toggle:hover {
+            background: var(--color-dark);
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 991px) {
+            .mobile-filters-toggle {
+                display: block;
+            }
+
+            .filters-section {
+                display: none;
+            }
+
+            .filters-section.show {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-container" id="loader">
+        <div class="loader-content">
+            <img src="logo.png" alt="El Rinconcito de Pau" class="loader-logo">
+            <div class="loader-text">El Rinconcito de Pau</div>
+            <div class="loader-dots">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h4><i class="bi bi-cart3"></i> Mi Carrito</h4>
+            <button onclick="closeCart()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">&times;</button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <p style="text-align: center; color: #999; padding: 40px 0;">Tu carrito está vacío</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="cart-checkout-btn" onclick="checkout()">
+                <i class="bi bi-credit-card"></i> Proceder al Pago
+            </button>
+        </div>
+    </div>
+
+    <!-- Promo Bar -->
+    <div class="promo-bar">
+        <span class="promo-text">🎉 PROMOCIÓN ESPECIAL - 20% DESCUENTO</span>
+        <span class="promo-text">🚚 ENVÍO GRATIS EN COMPRAS MAYORES A $50.000</span>
+        <span class="promo-text">⭐ OFERTAS EXCLUSIVAS EN PRODUCTOS SELECCIONADOS</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="El Rinconcito de Pau" style="height: 40px; margin-right: 10px;"> 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img src="fondo.png" alt="El Rinconcito de Pau" class="hero-background">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="hero-title" data-aos="fade-up">
+                    </h1>
+                    <button class="btn btn-primary-custom btn-lg" data-aos="fade-up" data-aos-delay="400" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+                        <i class="bi bi-bag-heart"></i> Ver Productos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Nuestros Productos</h2>
+            
+            <div class="row g-4">
+                <!-- Product 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-card">
+                        <span class="badge-new">Nuevo</span>
+                        <img src="images/pro1.jpeg" alt="Gotas Autobronceadoras" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Mlé Self-Tan Drops (Medium) - Gotas Autobronceadoras</h3>
+                            <p class="product-description">Ilumina y broncea tu piel con nuestras gotas autobronceadoras enriquecidas con agentes hidratantes.</p>
+                            <div class="product-price">$35.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-card">
+                        <img src="images/pro2.jpeg" alt="Bálsamo Acondicionador" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Babaria Bálsamo Acondicionador Nutritivo Exprés</h3>
+                            <p class="product-description">Hidrata, repara y suaviza tu cabello al instante con nuestra fórmula de acción antifrizz.</p>
+                            <div class="product-price">$30.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-card">
+                        <span class="badge-new">Popular</span>
+                        <img src="images/pro3.jpeg" alt="Brillo de Labios" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Brillo de Labios Unlimited Mary Kay</h3>
+                            <p class="product-description">Dale a tus labios un brillo espectacular y una sensación de hidratación instantánea con una fórmula ligera y no pegajosa.</p>
+                            <div class="product-price">$40.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="product-card">
+                        <img src="images/pro4.jpeg" alt="Labial Larga Duración" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Labial de Larga Duración Ame LIP BANG</h3>
+                            <p class="product-description">Define tus labios con un color intenso y sofisticado que permanece intacto durante todo el día. Su fórmula de alta cobertura ofrece un acabado impecable con una sensación confortable.</p>
+                            <div class="product-price">$25.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="product-card">
+                        <img src="images/pro5.jpeg" alt="Labial Matte" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Labial NOTE Mineral Matte Lip Cream</h3>
+                            <p class="product-description">Disfruta de un color mate cremoso con una textura de terciopelo que previene la sequedad y protege tus labios de factores externos.</p>
+                            <div class="product-price">$60.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="product-card">
+                        <span class="badge-new">Exclusivo</span>
+                        <img src="images/pro6.jpeg" alt="Iluminador en Polvo" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Polvo de Hadas Paulis Makeup - Iluminador en Polvo</h3>
+                            <p class="product-description">Haz brillar tu piel con un destello mágico y radiante. Este iluminador en polvo está diseñado para resaltar tus mejores facciones con un acabado luminoso y etéreo.</p>
+                            <div class="product-price">$8.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="700">
+                    <div class="product-card">
+                        <img src="images/pro7.jpeg" alt="Sombra en Polvo" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">SAMY Loose Pigment - Sombra en Polvo Perlada</h3>
+                            <p class="product-description">Logra una mirada impactante con nuestra sombra perlada de alta concentración. Su textura ligeramente húmeda garantiza una mejor adherencia y una intensidad de color superior para un maquillaje de ojos profesional.</p>
+                            <div class="product-price">$12.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="800">
+                    <div class="product-card">
+                        <img src="images/pro8.jpeg" alt="Rubor Mineral" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Raquel Rubor Minerals - Rubor con Vitaminas y Karité</h3>
+                            <p class="product-description">Dale a tus mejillas un color natural y saludable mientras cuidas tu piel. Este rubor mineral está formulado con ingredientes naturales que nutren y protegen el rostro, brindando un acabado suave y duradero.</p>
+                            <div class="product-price">$9.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 9 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="900">
+                    <div class="product-card">
+                        <img src="images/pro9.jpeg" alt="Paleta de Iluminadores" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Paleta de Iluminadores 3 Tonos-Face Luminizer Palette</h3>
+                            <p class="product-description">Añade un toque de color radiante y luz a tu rostro con esta paleta de tres tonos versátiles. Su diseño elegante combina diferentes acabados para lograr un maquillaje profesional y luminoso.</p>
+                            <div class="product-price">$10.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 10 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="product-card">
+                        <span class="badge-new">Nuevo</span>
+                        <img src="images/pro10.jpeg" alt="Pestañina Verde" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Ruby Rose Trópico Curls & Volume - Pestañina Verde</h3>
+                            <p class="product-description">Define tu mirada con un acabado impactante. Esta pestañina está diseñada para transformar tus pestañas, proporcionando un volumen increíble y una curva definida para un look natural y sofisticado.</p>
+                            <div class="product-price">$20.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 11 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1100">
+                    <div class="product-card">
+                        <img src="images/pro11.jpeg" alt="Sombra Individual" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Sombra Individual Paradise Volcano Bay Atenea</h3>
+                            <p class="product-description">Dale vida a tu mirada con sombras cremosas de alta pigmentación y larga duración. Su textura suave y versátil es perfecta para crear looks de día o de noche.</p>
+                            <div class="product-price">$12.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 12 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1200">
+                    <div class="product-card">
+                        <span class="badge-new">Exclusivo</span>
+                        <img src="images/pro12.jpeg" alt="Base Líquida" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Base Líquida Bliss Touch - Tono Beige</h3>
+                            <p class="product-description">Logra una piel impecable con nuestra base hidratante de alta cobertura y larga duración. Su fórmula está diseñada para controlar la grasa y resistir al agua, nutriendo tu rostro con ingredientes naturales.</p>
+                            <div class="product-price">$35.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 13 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1300">
+                    <div class="product-card">
+                        <span class="badge-new">Popular</span>
+                        <img src="images/pro13.jpeg" alt="Bruma Facial" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Bruma Facial de Vitamina C Dermohelp</h3>
+                            <p class="product-description">Refresca tu rostro y devuelve la luminosidad a tu piel con nuestra bruma antioxidante. Gracias a las múltiples propiedades de la Vitamina C, esta bruma ayuda a aclarar y unificar el tono de la piel, previniendo el foto-envejecimiento.</p>
+                            <div class="product-price">$40.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 14 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1400">
+                    <div class="product-card">
+                        <img src="images/pro14.jpeg" alt="Crema de Manos" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">MartiDerm Crema de Manos Intensiva</h3>
+                            <p class="product-description">Recupera la suavidad y salud de tus manos con este tratamiento intensivo diseñado para hidratar, proteger y regenerar la piel seca o agredida. Su fórmula avanzada de rápida absorción proporciona un alivio inmediato sin dejar sensación grasa.</p>
+                            <div class="product-price">$25.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 15 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1500">
+                    <div class="product-card">
+                        <span class="badge-new">Nuevo</span>
+                        <img src="images/pro15.jpeg" alt="Tratamiento Purificante" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Kativa Quick Detox - Tratamiento Purificante Pelo Graso</h3>
+                            <p class="product-description">Limpia profundamente y equilibra el exceso de grasa en el cuero cabelludo sin resecar las puntas. Este tratamiento "Quick Detox" purifica el folículo piloso, dejando el cabello con una sensación de frescura, ligereza y brillo natural por más tiempo.</p>
+                            <div class="product-price">$30.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 16 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1600">
+                    <div class="product-card">
+                        <span class="badge-new">Exclusivo</span>
+                        <img src="images/pro16.jpeg" alt="Tratamiento Antiedad" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">ACM Duolys Légère - Tratamiento Hidratante Antiedad</h3>
+                            <p class="product-description">Tratamiento intensivo diseñado para combatir el envejecimiento cutáneo mientras equilibra la hidratación en pieles normales, mixtas o con tendencia grasa. Su fórmula ligera permite que la piel recupere su firmeza, luminosidad y suavidad natural sin dejar sensación pesada.</p>
+                            <div class="product-price">$170.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 17 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1700">
+                    <div class="product-card">
+                        <span class="badge-new">Popular</span>
+                        <img src="images/pro17.jpeg" alt="Suero Facial Autobronceador" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Cocora Self Tan Face Serum - Suero Facial Autobronceador</h3>
+                            <p class="product-description">Logra un glow continuo y un dorado perfecto sin necesidad de sol. Este sérum ligero se integra a tu rutina facial para construir un bronceado uniforme, dejando tu piel luminosa e hidratada.</p>
+                            <div class="product-price">$80.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 18 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1800">
+                    <div class="product-card">
+                        <span class="badge-new">Nuevo</span>
+                        <img src="images/pro18.jpeg" alt="Suero Hidratante Antiedad" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Ties Antiedad Serum - Suero Hidratante Antiedad</h3>
+                            <p class="product-description">Rejuvenece tu piel con esta avanzada mezcla de ácido hialurónico, glicólico y niacinamida. Su fórmula enriquecida con extractos naturales disminuye los signos del envejecimiento, previene manchas y devuelve la luminosidad para un tono más uniforme y saludable.</p>
+                            <div class="product-price">$90.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 19 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1900">
+                    <div class="product-card">
+                        <img src="images/pro19.jpeg" alt="Exfoliante de Labios" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Cocora Slow & Day Lip Scrub - Exfoliante de Labios</h3>
+                            <p class="product-description">Luce unos labios increíblemente suaves y renovados con nuestro exfoliante enriquecido con Vitamina E. Elimina delicadamente las células muertas mientras aporta una hidratación profunda, dejando tus labios listos para lucir cualquier color con un acabado perfecto.</p>
+                            <div class="product-price">$15.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 20 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2000">
+                    <div class="product-card">
+                        <span class="badge-new">Exclusivo</span>
+                        <img src="images/pro20.jpeg" alt="Labial en Barra" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Ésika Colorfix Barra - Labial de Larga Duración</h3>
+                            <p class="product-description">Disfruta de un color intenso y sofisticado durante todo el día con nuestra fórmula renovada 100% no transfer. Este labial en barra se desliza suavemente para ofrecerte un acabado impecable que resiste tu ritmo sin necesidad de retoques.</p>
+                            <div class="product-price">$30.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 21 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2100">
+                    <div class="product-card">
+                        <span class="badge-new">Popular</span>
+                        <img src="images/pro21.jpeg" alt="Loción Perfumada" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">L'BEL Satin Rouge - Loción Perfumada Corporal</h3>
+                            <p class="product-description">Envuelve tu piel en una experiencia de suavidad y sofisticación. Esta loción perfumada no solo humecta profundamente, sino que intensifica y prolonga el aroma de tu fragancia favorita, dejando un acabado satinado y delicado durante todo el día.</p>
+                            <div class="product-price">$50.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 22 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2200">
+                    <div class="product-card">
+                        <img src="images/pro22.jpeg" alt="Toallas Desechables" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Biury Clean Dermotoallas - Toallas Desechables Faciales</h3>
+                            <p class="product-description">Transforma tu rutina de limpieza con estas dermotoallas diseñadas para fortalecer la barrera cutánea. Libres de bacterias y aptas para piel sensible, son el aliado perfecto para una piel con menos imperfecciones y un rostro siempre fresco y saludable.</p>
+                            <div class="product-price">$10.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 23 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2300">
+                    <div class="product-card">
+                        <span class="badge-new">Nuevo</span>
+                        <img src="images/pro23.jpeg" alt="Bálsamo Labial" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Hello Sunday The One For Your Lips - Bálsamo Labial con SPF 50</h3>
+                            <p class="product-description">Protege y nutre tu sonrisa con este bálsamo transparente de alta protección SPF 50. Enriquecido con manteca de karité y escualeno, mantiene tus labios profundamente hidratados y con un acabado brillante natural, ya sea solo o sobre tu labial favorito.</p>
+                            <div class="product-price">$12.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 24 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2400">
+                    <div class="product-card">
+                        <img src="images/pro24.jpeg" alt="Mascarilla Facial" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Dermohelp Mineral Mask - Mascarilla Facial de Arcilla Mineral</h3>
+                            <p class="product-description">Purifica y renueva tu rostro con el poder de los minerales. Esta mascarilla de arcilla está formulada para limpiar profundamente los poros, absorber el exceso de grasa y suavizar la textura de la piel, dejándola fresca, equilibrada y con una apariencia saludable.</p>
+                            <div class="product-price">$80.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 25 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2500">
+                    <div class="product-card">
+                        <span class="badge-new">Exclusivo</span>
+                        <img src="images/pro25.jpeg" alt="Protector Solar" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Dhems Solar Antiedad - Protector Solar SPF 50+ sin Color</h3>
+                            <p class="product-description">Protege tu piel con una defensa avanzada contra los rayos UVA/UVB mientras combate los signos del envejecimiento. Su fórmula de alto espectro tiene acción antioxidante e hidratante que estimula la síntesis de colágeno, dejando un acabado invisible ideal para todo tipo de piel.</p>
+                            <div class="product-price">$80.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 26 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2600">
+                    <div class="product-card">
+                        <span class="badge-new">Popular</span>
+                        <img src="images/pro26.jpeg" alt="Mantequilla Corporal" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Cocora Shimmer Glow - Mantequilla Corporal</h3>
+                            <p class="product-description">Dale a tu cuerpo una hidratación profunda con un acabado radiante. Nuestra mantequilla corporal Shimmer Glow deja tu piel suave, sedosa y con destellos sutiles que resaltan tu belleza natural, mientras disfrutas de sus deliciosos aromas tropicales.</p>
+                            <div class="product-price">$60.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 27 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2700">
+                    <div class="product-card">
+                        <img src="images/pro27.jpeg" alt="Lápiz Delineador" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">SAMY Smooth Pencil Liner - Lápiz Delineador con Sacapuntas</h3>
+                            <p class="product-description">Define tu mirada o tus labios con precisión y suavidad. Este delineador de textura cremosa se desliza sin esfuerzo, brindando un color intenso y duradero. Además, incluye su propio sacapuntas en la tapa para que siempre estés lista para un trazo perfecto.</p>
+                            <div class="product-price">$4.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 28 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2800">
+                    <div class="product-card">
+                        <span class="badge-new">Nuevo</span>
+                        <img src="images/pro28.jpeg" alt="Rubor Líquido" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Samy Xtravagant Length - Mascara de Pestañas</h3>
+                            <p class="product-description">Lleva tus pestañas a otro nivel con un alargamiento extremo y una definición impecable. Su cepillo especializado permite separar cada pestaña desde la raíz, brindando un efecto de longitud infinita y una mirada impactante sin dejar grumos.</p>
+                            <div class="product-price">$30.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 29 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2900">
+                    <div class="product-card">
+                        <span class="badge-new">Exclusivo</span>
+                        <img src="images/pro29.jpeg" alt="Sérum Facial" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Sérum Facial Niacinamida 10% + Zinc 1% - Botanikalia (30ml)</h3>
+                            <p class="product-description">Transforma la textura de tu piel con el Sérum de Niacinamida de Botanikalia. Esta potente fórmula combina un 10% de Niacinamida (Vitamina B3) con un 1% de Zinc PCA, creando el aliado perfecto para combatir las imperfecciones, regular el exceso de grasa y unificar el tono del rostro.</p>
+                            <div class="product-price">$50.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 30 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3000">
+                    <div class="product-card">
+                        <span class="badge-new">Popular</span>
+                        <img src="images/pro30.jpeg" alt="Exfoliante Corporal" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Aurora Butt & Boobs Polish - Exfoliante Antiacné Rainbow (300ml)</h3>
+                            <p class="product-description">Dale a tu piel un cuidado de ensueño con el Exfoliante Corporal Aurora. Este pulidor de textura batida y colores arcoíris no solo es visualmente increíble, sino que está específicamente formulado para tratar zonas delicadas como los glúteos y el busto.</p>
+                            <div class="product-price">$90.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 31 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3100">
+                    <div class="product-card">
+                        <img src="images/pro31.jpeg" alt="Mascarilla Capilar" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Mascarilla Intensiva Babaria Color Capture - Tsubaki y Fruta de la Pasión</h3>
+                            <p class="product-description">Mantén la intensidad de tu color por mucho más tiempo con la Mascarilla Intensiva Color Capture de Babaria. Formulada específicamente para cabellos teñidos o con mechas, esta mascarilla actúa profundamente para sellar la fibra capilar, prolongando la vida del tinte y revitalizando el brillo perdido tras los procesos químicos.</p>
+                            <div class="product-price">$25.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 32 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3200">
+                    <div class="product-card">
+                        <span class="badge-new">Popular</span>
+                        <img src="images/pro32.jpeg" alt="Sérum Capilar" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Sérum Finalizador Capilar HAIR2YOU - Fórmula Avanzada 5-en-1 (60ml)</h3>
+                            <p class="product-description">Dale el toque final perfecto a tu peinado con el Sérum Finalizador de HAIR2YOU. Este producto de alta gama ha sido diseñado con una innovadora fórmula 5-en-1 que actúa instantáneamente para transformar la apariencia de tu cabello, dejándolo con un acabado de salón, sedoso y profundamente brillante.</p>
+                            <div class="product-price">$35.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 33 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3300">
+                    <div class="product-card">
+                        <img src="images/pro33.jpeg" alt="Máscara de Pestañas" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Mascara SheDoes Maxi-Volume Length - Efecto Extensión de Pestañas (13g)</h3>
+                            <p class="product-description">Lleva tus pestañas al siguiente nivel con la Mascara Maxi-Volume Length de SheDoes. Esta pestañina ha sido diseñada para quienes buscan un efecto de "pestañas postizas" sin complicaciones. Su fórmula avanzada contiene fibras de extensión que se adhieren a tus pestañas naturales, logrando un alargamiento extremo y un grosor máximo desde la raíz hasta las puntas.</p>
+                            <div class="product-price">$15.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 34 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3400">
+                    <div class="product-card">
+                        <span class="badge-new">Exclusivo</span>
+                        <img src="images/pro34.jpeg" alt="Vitamina C Tópica" class="product-image" onclick="openImageModal(this.src)">
+                        <div class="product-body">
+                            <h3 class="product-title">Cetopic 22% Serum - Vitamina C Tópica Liposomal (30g)</h3>
+                            <p class="product-description">Rejuvenece y protege tu rostro con el poder del Cetopic 22% Serum de Medihealth. Este tratamiento de grado dermatológico ofrece una de las concentraciones más altas de Vitamina C en el mercado, diseñada para combatir el envejecimiento prematuro y devolver la luminosidad perdida a la piel.</p>
+                            <div class="product-price">$200.000</div>
+                            <button class="btn btn-primary-custom w-100">
+                                <i class="bi bi-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/573188165844" target="_blank" class="floating-whatsapp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <!-- Floating Cart Icon -->
+    <div class="floating-cart-icon" onclick="toggleCart()">
+        <i class="bi bi-cart3"></i>
+        <span class="floating-cart-badge hidden" id="floatingCartBadge">0</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <h4><i class="bi bi-geo-alt"></i> Ubicación</h4>
+                    <p>TIENDA VIRTUAL</p>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <h4><i class="bi bi-telephone"></i> Contacto</h4>
+                    <p>Whatsapp 3188165844</p>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <h4><i class="bi bi-clock"></i> Horario</h4>
+                    <p>Lunes a Sábado: 9am - 8pm<br>Domingo: 10am - 6pm</p>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.3);">
+            <div class="text-center">
+                <p>&copy; 2024 El Rinconcito de Pau. Todos los derechos reservados.</p>
+                <div class="mt-3">
+                    <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-twitter fs-4"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-whatsapp fs-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal" onclick="closeImageModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Add to cart animation (only for product buttons)
+        document.querySelectorAll('.product-card .btn-primary-custom').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Check if it's a product button (not the main "Ver Productos" button)
+                if (this.closest('.product-card')) {
+                    e.preventDefault();
+                    
+                    // Get product info
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-title').textContent;
+                    const productPrice = productCard.querySelector('.product-price').textContent.replace('$', '');
+                    const productImage = productCard.querySelector('.product-image').src;
+                    
+                    // Add to cart
+                    addToCart(productName, productPrice, productImage);
+                    
+                    // Create floating cart icon
+                    const cartIcon = document.createElement('i');
+                    cartIcon.className = 'bi bi-cart-check-fill';
+                    cartIcon.style.cssText = `
+                        position: fixed;
+                        color: #28a745;
+                        font-size: 2rem;
+                        z-index: 9999;
+                        pointer-events: none;
+                        animation: flyToCart 1s ease-out forwards;
+                    `;
+                    
+                    // Position at button
+                    const rect = this.getBoundingClientRect();
+                    cartIcon.style.left = rect.left + rect.width/2 + 'px';
+                    cartIcon.style.top = rect.top + 'px';
+                    
+                    document.body.appendChild(cartIcon);
+                    
+                    // Animate to corner
+                    setTimeout(() => {
+                        cartIcon.style.left = '20px';
+                        cartIcon.style.top = '20px';
+                    }, 10);
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        cartIcon.remove();
+                    }, 1000);
+                    
+                    // Change button temporarily
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="bi bi-check-circle"></i> ¡Agregado!';
+                    this.style.background = 'linear-gradient(90deg, #28a745, #20c997)';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.style.background = '';
+                    }, 2000);
+                }
+            });
+        });
+
+        // Loader functionality
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 2000); // Show loader for 2 seconds
+        });
+
+        // Cart functionality
+        let cart = [];
+        let cartTimeout;
+        
+        function toggleCart() {
+            const cartModal = document.getElementById('cartModal');
+            const cartOverlay = document.getElementById('cartOverlay');
+            
+            if (cartModal.classList.contains('open')) {
+                cartModal.classList.remove('open');
+                cartOverlay.classList.remove('show');
+            } else {
+                cartModal.classList.add('open');
+                cartOverlay.classList.add('show');
+            }
+        }
+        
+        function closeCart() {
+            const cartModal = document.getElementById('cartModal');
+            const cartOverlay = document.getElementById('cartOverlay');
+            cartModal.classList.remove('open');
+            cartOverlay.classList.remove('show');
+        }
+        
+        function showCartTemporarily() {
+            const cartModal = document.getElementById('cartModal');
+            const cartOverlay = document.getElementById('cartOverlay');
+            
+            // Clear any existing timeout
+            if (cartTimeout) {
+                clearTimeout(cartTimeout);
+            }
+            
+            // Show cart
+            cartModal.classList.add('open');
+            cartOverlay.classList.add('show');
+            
+            // Auto-hide after 5 seconds
+            cartTimeout = setTimeout(() => {
+                cartModal.classList.remove('open');
+                cartOverlay.classList.remove('show');
+            }, 5000);
+        }
+        
+        function addToCart(productName, productPrice, productImage) {
+            const existingItem = cart.find(item => item.name === productName);
+            
+            // Convert price to number (remove $ and format for Colombian pesos)
+            const numericPrice = parseInt(productPrice.replace(/[^0-9]/g, ''));
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    name: productName,
+                    price: numericPrice,
+                    image: productImage,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            updateCartBadge();
+            updateFloatingCartBadge();
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+            updateCartBadge();
+            updateFloatingCartBadge();
+        }
+        
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                removeFromCart(index);
+            } else {
+                updateCartDisplay();
+                updateCartBadge();
+                updateFloatingCartBadge();
+            }
+        }
+        
+        function updateCartDisplay() {
+            const cartBody = document.getElementById('cartBody');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartBody.innerHTML = '<p style="text-align: center; color: #999; padding: 40px 0;">Tu carrito está vacío</p>';
+                cartTotal.textContent = '$0';
+                return;
+            }
+            
+            let html = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                html += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">$${item.price.toLocaleString('es-CO')}</div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartBody.innerHTML = html;
+            cartTotal.textContent = `$${total.toLocaleString('es-CO')}`;
+        }
+        
+        function updateCartBadge() {
+            // This function is kept for compatibility but no longer used
+        }
+        
+        function updateFloatingCartBadge() {
+            const badge = document.getElementById('floatingCartBadge');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+        
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Create message for WhatsApp
+            let message = "✅ Resumen de tu Pedido\n\n";
+            message += "📦 Detalles de la compra:\n\n";
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                message += `${index + 1}️⃣ ${item.name}\n`;
+                message += `💰 Precio: $${item.price.toLocaleString('es-CO')}\n`;
+                message += `🔢 Cantidad: ${item.quantity}\n`;
+                message += `💵 Subtotal: $${itemTotal.toLocaleString('es-CO')}\n\n`;
+            });
+            
+            message += `✨ Total a pagar: $${total.toLocaleString('es-CO')} ✨\n\n`;
+            message += "📝 Información pendiente:\n\n";
+            message += "� Método de entrega: (Por favor confirmar)\n";
+            message += "📍 Dirección de envío: (Por favor confirmar)\n\n";
+            message += "🙏 ¡Muchas gracias por tu compra!";
+            
+            // Open WhatsApp with message
+            const whatsappUrl = `https://wa.me/573188165844?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Image modal functions
+        function openImageModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imageSrc;
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Add CSS animation for flying cart
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes flyToCart {
+                0% {
+                    transform: scale(1) rotate(0deg);
+                    opacity: 1;
+                }
+                50% {
+                    transform: scale(1.5) rotate(180deg);
+                }
+                100% {
+                    transform: scale(0.5) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
