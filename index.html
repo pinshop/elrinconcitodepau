@@ -1897,7 +1897,20 @@
                     const productCard = this.closest('.product-card');
                     const productName = productCard.querySelector('.product-title').textContent;
                     const productPrice = productCard.querySelector('.product-price').textContent.replace('$', '');
-                    const productImage = productCard.querySelector('.product-image').src;
+                    
+                    // Get product image - handle both single image and slider
+                    let productImage;
+                    const singleImage = productCard.querySelector('.product-image');
+                    const sliderImage = productCard.querySelector('.product-image-slider img.active');
+                    
+                    if (singleImage) {
+                        productImage = singleImage.src;
+                    } else if (sliderImage) {
+                        productImage = sliderImage.src;
+                    } else {
+                        // Fallback to first image in slider
+                        productImage = productCard.querySelector('.product-image-slider img').src;
+                    }
                     
                     // Add to cart
                     addToCart(productName, productPrice, productImage);
